@@ -12,5 +12,6 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
     @Query(value = "select * from candidates where party_id = ?;", nativeQuery = true)
     List<Candidate> getCandidatesByPartyId(Long id);
+
     Candidate findByFirstNameAndLastName(String firstName, String lastName);
 }
