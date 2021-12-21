@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
+
+    // Var ikke sikker på, om det var det her der mentes i opgave 2c?
+    // Alternativt kan man få et parti og alle dets medlemmer ved at bruge PartyControlleren og tilhørende repo.
     @Query(value = "select * from candidates where party_id = ?;", nativeQuery = true)
     List<Candidate> getCandidatesByPartyId(Long id);
 
