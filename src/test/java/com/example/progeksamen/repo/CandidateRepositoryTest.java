@@ -15,6 +15,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -50,12 +52,19 @@ public class CandidateRepositoryTest {
 
 
         entityManager.persist(candidate);
+        entityManager.persist(socialDemokratiet);
         entityManager.flush();
 
         Candidate created = candidateRepository.findByFirstNameAndLastName("John", "Doe");
 
+
+        List<Candidate> candidateList = candidateRepository.getCandidatesByPartyId(1L);
+
+
         assertThat(created.getFirstName()).isEqualTo(candidate.getFirstName());
         assertThat(created.getLastName()).isEqualTo(candidate.getLastName());
+
+        assertThat(candidateList.get(0).getFirstName()).isEqualTo(created.getFirstName());
 
 
     }
